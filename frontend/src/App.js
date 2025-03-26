@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import "./App.css";
+import { MdDelete, MdEdit } from "react-icons/md";
 
 const App = () => {
   const [tasks, setTasks] = useState([]);
@@ -24,17 +26,23 @@ const App = () => {
   const addTask = () => {
     axios
       .post("http://localhost:8000/task", { title, description })
-      .then((response) => setTasks([...tasks, response.data]))
+      .then((response) => {
+        setTasks([...tasks, response.data]);
+        setTitle(""); // Clear title input field
+        setDescription(""); // Clear description textarea)
+      })
       .catch((error) => console.error("Error adding task:", error));
   };
 
-  // Update a task
-  const updateTask = (id, updatedTask) => {
+  // Update a task (toggle completion)
+  const toggleCompletion = (id, completed) => {
     axios
-      .put(`http://localhost:8000/${id}`, updatedTask)
-      .then((response) =>
-        setTasks(tasks.map((task) => (task._id === id ? response.data : task)))
-      )
+      .put(`http://localhost:8000/${id}`, { completed })
+      .then(() => {
+        setTasks(
+          tasks.map((task) => (task._id === id ? { ...task, completed } : task))
+        );
+      })
       .catch((error) => console.error("Error updating task:", error));
   };
 
@@ -55,54 +63,101 @@ const App = () => {
 
   // Save edited task
   const saveEdit = (id) => {
-    updateTask(id, { title: editedTitle, description: editedDescription });
-    setEditingTaskId(null); // Exit edit mode
+    axios
+      .put(`http://localhost:8000/${id}`, {
+        title: editedTitle,
+        description: editedDescription,
+      })
+      .then(() => {
+        setTasks(
+          tasks.map((task) =>
+            task._id === id
+              ? { ...task, title: editedTitle, description: editedDescription }
+              : task
+          )
+        );
+        setEditingTaskId(null); // Exit edit mode
+      })
+      .catch((error) => console.error("Error updating task:", error));
   };
 
   return (
-    <div>
+    <div className="todo-container">
       <h1>Task Management</h1>
-      <input
-        type="text"
-        placeholder="Title"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-      />
-      <input
-        type="text"
-        placeholder="Description"
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-      />
-      <button onClick={addTask}>Add Task</button>
-      <ul>
+      <div className="add-task">
+        <div className="task-heading-add-task">
+          <input
+            type="text"
+            placeholder="Title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            className="task-title-input"
+          />
+        </div>
+        <div className="task-desc">
+          <textarea
+            placeholder="Description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          />
+        </div>
+
+        <button onClick={addTask}>Add Task</button>
+      </div>
+
+      <ul className="task-list">
         {tasks.map((task) => (
-          <li key={task._id}>
+          <li key={task._id} className="task-item">
             {editingTaskId === task._id ? (
-              <>
-                <input
-                  type="text"
-                  value={editedTitle}
-                  onChange={(e) => setEditedTitle(e.target.value)}
-                />
+              <div className="editing-task-card">
+                <div className="editing-task-title">
+                  <input
+                    type="text"
+                    value={editedTitle}
+                    onChange={(e) => setEditedTitle(e.target.value)}
+                  />
+                
                 <input
                   type="text"
                   value={editedDescription}
                   onChange={(e) => setEditedDescription(e.target.value)}
                 />
+                </div>
+                <div className="editing-task-buttons">
                 <button onClick={() => saveEdit(task._id)}>Save</button>
                 <button onClick={() => setEditingTaskId(null)}>Cancel</button>
-              </>
+                </div>
+              </div>
             ) : (
-              <>
-                <h2>{task.title}</h2>
-                <p>{task.description}</p>
-                <button onClick={() => updateTask(task._id, { ...task, completed: !task.completed })}>
-                  {task.completed ? "Mark as Incomplete" : "Mark as Complete"}
-                </button>
-                <button onClick={() => startEditing(task)}>Edit</button>
-                <button onClick={() => deleteTask(task._id)}>Delete</button>
-              </>
+              <div className="task-card">
+                <div className="task-heading">
+                  <input
+                    type="checkbox"
+                    checked={task.completed}
+                    onChange={(e) =>
+                      toggleCompletion(task._id, e.target.checked)
+                    }
+                  />
+                  <div className="task-title">
+                    <h2 className={task.completed ? "completed" : ""}>
+                      {task.title}
+                    </h2>
+                  </div>
+                  <button
+                    className="edit-button"
+                    onClick={() => startEditing(task)}
+                  >
+                    <MdEdit />
+                  </button>
+                  <button
+                    className="delete-button"
+                    onClick={() => deleteTask(task._id)}
+                  >
+                    <MdDelete />
+                  </button>
+                </div>
+                <div className="task-desc">{task.description}</div>
+              </div>
             )}
           </li>
         ))}
