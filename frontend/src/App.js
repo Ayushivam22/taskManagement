@@ -26,7 +26,7 @@ const App = () => {
   // Add a new task
   const addTask = () => {
     axios
-      .post(`${BASE_URL}/task`, { title, description })
+      .post(`${BASE_URL}task`, { title, description })
       .then((response) => {
         setTasks([...tasks, response.data]);
         setTitle(""); // Clear title input field
@@ -38,7 +38,7 @@ const App = () => {
   // Update a task (toggle completion)
   const toggleCompletion = (id, completed) => {
     axios
-      .put(`${BASE_URL}/${id}`, { completed })
+      .put(`${BASE_URL}${id}`, { completed })
       .then(() => {
         setTasks(
           tasks.map((task) => (task._id === id ? { ...task, completed } : task))
@@ -50,7 +50,7 @@ const App = () => {
   // Delete a task
   const deleteTask = (id) => {
     axios
-      .delete(`${BASE_URL}/${id}`)
+      .delete(`${BASE_URL}${id}`)
       .then(() => setTasks(tasks.filter((task) => task._id !== id)))
       .catch((error) => console.error("Error deleting task:", error));
   };
@@ -65,7 +65,7 @@ const App = () => {
   // Save edited task
   const saveEdit = (id) => {
     axios
-      .put(`${BASE_URL}/${id}`, {
+      .put(`${BASE_URL}${id}`, {
         title: editedTitle,
         description: editedDescription,
       })
