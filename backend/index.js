@@ -5,12 +5,15 @@ import router from './routes/todoRouter.js';
 import cors from 'cors';
 dotenv.config();
 const app = express();
-dbConnect();
 
 // Middleware for parsing JSON request bodies
 app.use(express.json());
-//import routes 
 app.use(cors());
+dbConnect();
+
+
+//import routes 
+
 app.use('/',router);
 
 //connect database
