@@ -1,4 +1,2 @@
 deployed links:
-https://task-management-frontend-red-tau.vercel.app/
-https://task-management-frontend-red-tau.vercel.app/
-https://task-management-frontend-ayushivam22s-projects.vercel.app/
+https://task-management-qsiq.vercel.app/
