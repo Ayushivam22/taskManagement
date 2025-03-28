@@ -88,6 +88,3 @@ Click Send and check the response.
 
 ![Task Management UI](screenshots/1.png) => This is the basic task management UI
 ![Task Management UI](screenshots/2.png)=> To add new task put title and description then click on add button 
-![Task Management UI](screenshots/3.png)=> To edit the task click on edit button then edit task or description then click on save button
-![Task Management UI](screenshots/4.png)
-![Task Management UI](screenshots/5.png)=> To delete task click on delete button
