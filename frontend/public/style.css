@@ -1,0 +1,23 @@
+body{
+    color: #000000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding:0px;
+    margin: 0px;
+    background-color: #9ACBD0;
+}
+
+#root{
+    background-color: #F2EFE7;
+    height:90vh;
+    width:90vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap:10px;
+    padding:10px;
+    border-radius: 10px;
+}

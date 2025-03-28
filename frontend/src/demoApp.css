@@ -1,0 +1,266 @@
+.todo-app {
+    position: relative;
+    display: flex;
+    height: 100%;
+    width: 100%;
+    flex-direction: column;
+    background-color: #c9c1c100;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.header {
+    font-size: x-large;
+    color: #F2EFE7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 70%;
+    padding: 10px;
+    margin: 5px;
+    background-color: #006A71;
+    border-radius: 10px;
+}
+
+.todo-container {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    gap: 10px;
+    width: 70%;
+    padding: 10px;
+}
+
+.task-list {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.task-item {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    background-color: #F2EFE7;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.task-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.task-heading {
+    z-index: 0;
+    display: flex;
+    height: fit-content;
+    align-items: center;
+}
+
+.task-title h2 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: bold;
+    color: #006A71;
+    text-align: left;
+}
+
+.completed {
+    text-decoration: line-through;
+    color: gray;
+}
+
+.task-desc {
+    font-size: 16px;
+    color: #555;
+    margin-top: 5px;
+}
+
+.task-item input[type="checkbox"] {
+    margin-right: 10px;
+    transform: scale(1.2);
+    accent-color: #006A71;
+}
+
+.add-button {
+    position: absolute;
+    background: none;
+    top: 10px;
+    right: 20px;
+    width: 30px;
+    height: 30px;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    margin-left: 10px;
+    color: #006A71;
+    transition: color 0.2s ease;
+}
+
+.edit-button,
+.delete-button {
+    position: absolute;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    color: #006A71;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    opacity: 0;
+    transform: translateY(-10px);
+}
+
+.task-item:hover .edit-button,
+.task-item:hover .delete-button {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.edit-button {
+    top: 10px;
+    right: 40px;
+}
+
+.delete-button {
+    top: 10px;
+    right: 10px;
+}
+
+.edit-button:hover {
+    color: #ffa500;
+}
+
+.delete-button:hover {
+    color: red;
+}
+
+.editing-task-card {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    background-color: #F2EFE7;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border: 1px solid #006A71;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.editing-task-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.editing-task-title input {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #006A71;
+    border-radius: 8px;
+    background-color: #ffffff;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.editing-task-title input:focus {
+    border-color: #004d4f;
+    box-shadow: 0 0 4px rgba(0, 106, 113, 0.5);
+}
+
+.editing-task-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+.editing-task-buttons button {
+    background-color: #006A71;
+    color: #F2EFE7;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 15px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.editing-task-buttons button:hover {
+    background-color: #004d4f;
+    transform: translateY(-2px);
+}
+
+.editing-task-buttons button:active {
+    transform: translateY(0);
+    background-color: #003a3c;
+}
+
+  
+  .dropdown-toggle {
+    position: absolute;
+    top: 10px;
+    right:10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+  }
+  
+  .dropdown-menu {
+    position: absolute;
+    top: 10px;
+    right: 40px;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+  }
+  
+  .dropdown-menu button {
+    background: none;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.2s ease;
+  }
+  
+  .dropdown-menu button:hover {
+    background-color: #f0f0f0;
+  }
+
+  @media (max-width: 768px) {
+    .header {
+        width: 90%;
+        font-size: medium;
+    }
+
+    .todo-container {
+        width: 90%;
+        padding: 5px;
+    }
+
+    .task-item {
+        padding: 10px;
+    }
+
+    .task-title h2 {
+        font-size: 18px;
+    }
+
+    .add-button {
+        width: 40px;
+        height: 40px;
+        font-size: 24px;
+    }
+}
