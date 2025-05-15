@@ -15,6 +15,7 @@ dbConnect();
 //import routes 
 
 app.use('/',router);
+//jai ho
 
 //connect database
 
