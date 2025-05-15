@@ -54,7 +54,7 @@ const App = () => {
         console.log("Tasks fetched successfully");
       })
       .catch((error) => console.error("Error fetching tasks:", error));
-  }, []);
+  }, [BASE_URL]);
 
   // Open popup window for adding tasks
   const addingNewTask = () => {
